@@ -75,6 +75,10 @@ lua << EOF
   }
 EOF
 
+" show line diagnostics on hover (250 ms delay) in a box
+set updatetime=250
+autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})
+
 " ==== setup nvim-compe ====
 lua << EOF
   require'compe'.setup {
@@ -139,9 +143,6 @@ lua << EOF
   vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
   vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
 EOF
-" decrease update time from 4 seconds (influences when CursorHold etc is triggered)
-set updatetime=250
-autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})
 
 " highlight trailing white spaces in all files
 highlight ExtraWhitespace ctermbg=red guibg=red
