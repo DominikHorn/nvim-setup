@@ -150,8 +150,11 @@ EOF
 " ==== Vimspector configuration ====
 " use default vimspector keyboard mappings
 let g:vimspector_enable_mappings = 'HUMAN'
-" install CodeLLDB for c/c++ DAP support
+" install CodeLLDB as c/c++ debugging plugin support
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
+" enable debug inspect popup for nvim
+nmap <Leader>di <Plug>VimspectorBalloonEval
+xmap <Leader>di <Plug>VimspectorBalloonEval
 
 " highlight trailing white spaces in all files
 highlight ExtraWhitespace ctermbg=red guibg=red
