@@ -30,6 +30,9 @@ call plug#begin('~/.config/nvim/plugged')
 
   " fuzzy file search support
   Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
+
+  " in editor professional debugging using vimspector
+  Plug 'puremourning/vimspector' ", { 'do': './install_gadget.py --enable-c --enable-cpp --enable-rust' }
 call plug#end()
 
 " ==== configure lsp integration ====
@@ -143,6 +146,12 @@ lua << EOF
   vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
   vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
 EOF
+
+" ==== Vimspector configuration ====
+" use default vimspector keyboard mappings
+let g:vimspector_enable_mappings = 'HUMAN'
+" install CodeLLDB for c/c++ DAP support
+let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
 
 " highlight trailing white spaces in all files
 highlight ExtraWhitespace ctermbg=red guibg=red

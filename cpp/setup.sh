@@ -40,8 +40,11 @@ brew install cppman
 cppman --pager nvim
 cppman -c
 
-# execute :PlugInstall once to ensure all plugins are properly installed and loaded
-nvim -c :PlugInstall -c :qa
+# install & configure vimspector dependencies for c++
+pip3 install pynvim
+
+# execute :PlugInstall & :VimspectorInstall once to finish setup
+nvim -c :PlugInstall -c :VimspectorInstall -c :qa
 
 # optionally configure git to use neovim in the future
 read -p "Do you want to use nvim as your git editor? [y/n]: " -r
