@@ -28,8 +28,9 @@ call plug#begin('~/.config/nvim/plugged')
   " open corresponding cpp reference for that symbol
   Plug 'DominikHorn/vim-cppman', { 'on': 'Cppman' }
 
-  " fuzzy file search support
-  Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
+  " fuzzy file search support. Can't lazy load since ctrl+p shortcut won't be
+  " enabled then :(
+  Plug 'ctrlpvim/ctrlp.vim'
 
   " in editor professional debugging using vimspector
   Plug 'puremourning/vimspector' ", { 'do': './install_gadget.py --enable-c --enable-cpp --enable-rust' }
