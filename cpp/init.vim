@@ -9,6 +9,8 @@ set textwidth=0
 set colorcolumn=120
 highlight ColorColumn ctermbg=darkgray
 
+set signcolumn=yes
+
 " tab/indentation style
 set tabstop=2
 set shiftwidth=2
@@ -179,11 +181,6 @@ au BufWinEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
 au BufWinLeave * call clearmatches()
-
-" autoformat c and c++ files on save
-autocmd FileType c,cpp autocmd BufWritePre * lua vim.lsp.buf.formatting()
-" otherwise autoformat sometimes breaks buffer contents ;/
-set signcolumn=yes
 
 " ==== custom key bindings ====
 " change directory to the currently open buffer's file location
