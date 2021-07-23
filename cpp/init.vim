@@ -149,8 +149,23 @@ lua << EOF
 EOF
 
 " ==== Vimspector configuration ====
-" use default vimspector keyboard mappings
-let g:vimspector_enable_mappings = 'HUMAN'
+" vimspector keyboard mappings, emulate CLion as good as possible
+nmap <F1>         <Plug>VimspectorToggleBreakpoint
+nmap <leader><F1> <Plug>VimspectorToggleConditionalBreakpoint
+nmap <F2>         <Plug>VimspectorAddFunctionBreakpoint
+
+nmap <F3>         :VimspectorReset<CR>
+nmap <leader><F3> <Plug>VimspectorStop
+nmap <F4>         <Plug>VimspectorRestart
+nmap <F5>         <Plug>VimspectorContinue
+nmap <leader><F5> <Plug>VimspectorLaunch
+nmap <F6>         <Plug>VimspectorPause
+
+nmap <F7>         <Plug>VimspectorStepInto
+nmap <F8>         <Plug>VimspectorStepOver
+nmap <leader><F8> <Plug>VimspectorStepOut
+nmap <F9>         <Plug>VimspectorRunToCursor
+
 " install CodeLLDB as c/c++ debugging plugin support
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
 " enable debug inspect popup for nvim
