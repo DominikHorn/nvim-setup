@@ -168,7 +168,7 @@ nmap <F9>         <Plug>VimspectorRunToCursor
 
 " install CodeLLDB as c/c++ debugging plugin support
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
-" enable debug inspect popup for nvim
+" enable debug inspect popup for nvim via custom shortcut
 nmap <Leader>di <Plug>VimspectorBalloonEval
 xmap <Leader>di <Plug>VimspectorBalloonEval
 
