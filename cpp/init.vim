@@ -180,16 +180,10 @@ au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
 au BufWinLeave * call clearmatches()
 
-" TODO: this destroys buffer contents sometimes :(
 " autoformat c and c++ files on save
-"function! AutoformatCppBeforeWrite()
-"    silent lua vim.lsp.buf.formatting()
-"    silent doautocmd BufWritePre
-"
-"    execute 'write '
-"    silent doautocmd BufWritePost
-"endfunction
-"autocmd FileType c,cpp autocmd BufWriteCmd * call AutoformatCppBeforeWrite()
+autocmd FileType c,cpp autocmd BufWritePre * lua vim.lsp.buf.formatting()
+" otherwise autoformat sometimes breaks buffer contents ;/
+set signcolumn=yes
 
 " ==== custom key bindings ====
 " change directory to the currently open buffer's file location
