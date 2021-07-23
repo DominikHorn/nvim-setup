@@ -181,7 +181,14 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 au BufWinLeave * call clearmatches()
 
 " autoformat c and c++ files on save
-autocmd FileType c,cpp autocmd BufWritePost * lua vim.lsp.buf.formatting()
+function! AutoformatCppBeforeWrite()
+    silent lua vim.lsp.buf.formatting()
+    silent doautocmd BufWritePre
+
+    execute 'write '
+    silent doautocmd BufWritePost
+endfunction
+autocmd FileType c,cpp autocmd BufWriteCmd * call AutoformatCppBeforeWrite()
 
 " ==== custom key bindings ====
 " change directory to the currently open buffer's file location
