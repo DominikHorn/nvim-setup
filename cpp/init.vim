@@ -180,21 +180,24 @@ au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
 au BufWinLeave * call clearmatches()
 
+" TODO: this destroys buffer contents sometimes :(
 " autoformat c and c++ files on save
-function! AutoformatCppBeforeWrite()
-    silent lua vim.lsp.buf.formatting()
-    silent doautocmd BufWritePre
-
-    execute 'write '
-    silent doautocmd BufWritePost
-endfunction
-autocmd FileType c,cpp autocmd BufWriteCmd * call AutoformatCppBeforeWrite()
+"function! AutoformatCppBeforeWrite()
+"    silent lua vim.lsp.buf.formatting()
+"    silent doautocmd BufWritePre
+"
+"    execute 'write '
+"    silent doautocmd BufWritePost
+"endfunction
+"autocmd FileType c,cpp autocmd BufWriteCmd * call AutoformatCppBeforeWrite()
 
 " ==== custom key bindings ====
 " change directory to the currently open buffer's file location
 nnoremap <silent> <leader>cd :lcd %:h<CR>
 " remove trailing white spaces
 nnoremap <silent> <leader>rs :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+" format code
+nnoremap <silent> <space>f :lua vim.lsp.buf.formatting()<CR>
 " convenience commands for wrapping the word under cursor in quotes
 nnoremap <leader>" ciw""<Esc>P
 nnoremap <leader>' ciw''<Esc>P
