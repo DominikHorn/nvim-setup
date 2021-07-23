@@ -176,3 +176,5 @@ nnoremap <silent> <leader>rs :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar
 " convenience commands for wrapping the word under cursor in quotes
 nnoremap <leader>" ciw""<Esc>P
 nnoremap <leader>' ciw''<Esc>P
+" fuzzy search in file using vimgrep
+nnoremap <expr> <leader>t ":vimgrep /" . input("search string: ") . "/gj **/*." . input("file extension: ") . "<CR>:cw<CR>"
