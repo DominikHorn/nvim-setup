@@ -34,6 +34,9 @@ call plug#begin('~/.config/nvim/plugged')
   " enabled then :(
   Plug 'ctrlpvim/ctrlp.vim'
 
+  " autoformat on save
+  Plug 'rhysd/vim-clang-format'
+
   " in editor professional debugging using vimspector
   Plug 'puremourning/vimspector' ", { 'do': './install_gadget.py --enable-c --enable-cpp --enable-rust' }
 call plug#end()
@@ -84,6 +87,9 @@ EOF
 " show line diagnostics on hover (250 ms delay) in a box
 set updatetime=250
 autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})
+
+" ==== autoformat on save ====
+autocmd FileType c,cpp :ClangFormatAutoEnable
 
 " ==== setup nvim-compe ====
 lua << EOF
@@ -187,8 +193,6 @@ au BufWinLeave * call clearmatches()
 nnoremap <silent> <leader>cd :lcd %:h<CR>
 " remove trailing white spaces
 nnoremap <silent> <leader>rs :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
-" format code
-nnoremap <silent> <space>f :lua vim.lsp.buf.formatting()<CR>
 " convenience commands for wrapping the word under cursor in quotes
 nnoremap <leader>" ciw""<Esc>P
 nnoremap <leader>' ciw''<Esc>P
