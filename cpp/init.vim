@@ -199,7 +199,7 @@ nnoremap <leader>' ciw''<Esc>P
 " fuzzy search in file using vimgrep
 nnoremap <expr> <leader>t ":vimgrep /" . input("search string: ") . "/gj **/*." . input("file extension: ") . "<CR>:cw<CR>"
 " debug build and launch vimspector
-nnoremap <leader>d :!./build-debug.sh<CR>:call vimspector#Launch()<CR>
+nnoremap <leader>d :execute '!./build-debug.sh' \| if !v:shell_error \| call vimspector#Launch() \| endif<CR>
 
 " ==== custom theming ====
 highlight NormalFloat ctermbg=black guibg=black ctermfg=cyan guifg=cyan
