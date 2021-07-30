@@ -12,8 +12,19 @@ get_abs_path() {
 # exit on error
 set -e
 
-# install neovim
-brew install neovim
+# install dependencies
+sudo apt-get update
+sudo apt-get install -y cmake libtool-bin gettext curl clangd-9 cppman python3-pip
+
+# install neovim from source (apt version is to old)
+NEOVIM_REPO=.neovim-repo
+git clone https://github.com/neovim/neovim.git $NEOVIM_REPO
+cd $NEOVIM_REPO
+git checkout release-0.5
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+cd -
+sudo rm -rf $NEOVIM_REPO
 
 # link necessary files to nvim config file location
 mkdir -p "$NVIM_CONFIG"
@@ -31,17 +42,13 @@ fi
 ln -s $(get_abs_path "cpp/init.vim") "$NVIM_CONFIG"
 
 # install vim-plug plugin manager
+mkdir -p "$NVIM_CONFIG"
 sh -c 'curl -fLo "${HOME}/.config/nvim/autoload/plug.vim" --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-# install & configure clangd following official documentation:
+# configure clangd following official documentation:
 # https://clangd.llvm.org/installation
-brew install llvm
-
-# install & configure cppman (e.g., download all relevant man pages)
-brew install cppman
-cppman --pager nvim
-cppman -c
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-9 100
 
 # install & configure vimspector dependencies for c++
 pip3 install pynvim
