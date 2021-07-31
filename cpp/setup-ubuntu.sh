@@ -1,7 +1,12 @@
 #!/bin/bash
 
+# Helper variables
 REL_SCRIPT_DIR="$(dirname "$0")"
 NVIM_CONFIG="${HOME}/.config/nvim"
+
+# Colored output
+YELLOW='\033[1;33m'
+NC='\033[0m'
 
 # get absolute path for a given file
 get_abs_path() {
@@ -14,7 +19,10 @@ set -e
 
 # install dependencies
 sudo apt-get update
-sudo apt-get install -y cmake libtool-bin gettext curl clangd-9 cppman python3-pip
+sudo apt-get install -y cmake libtool-bin gettext curl clangd-9 clang-format-12 cppman python3-pip
+
+# warning for user
+echo -e "${YELLOW}[Warning] please setup an alias 'clang-format' to 'clang-format-12'${NC}"
 
 # install neovim from source (apt version is to old)
 NEOVIM_REPO=.neovim-repo
