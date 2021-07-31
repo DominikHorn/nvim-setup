@@ -205,3 +205,9 @@ nnoremap <leader>d :execute '!./build-debug.sh' \| if !v:shell_error \| call vim
 highlight NormalFloat ctermbg=black guibg=black ctermfg=cyan guifg=cyan
 highlight Pmenu ctermbg=gray guibg=gray ctermfg=black guifg=black
 highlight PmenuSel ctermbg=cyan guibg=cyan ctermfg=black guifg=black
+
+" ==== hard mode ====
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
