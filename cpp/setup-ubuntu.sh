@@ -3,6 +3,7 @@
 # Helper variables
 REL_SCRIPT_DIR="$(dirname "$0")"
 NVIM_CONFIG="${HOME}/.config/nvim"
+INIT_VIM="init.vim"
 
 # Colored output
 YELLOW='\033[1;33m'
@@ -37,17 +38,17 @@ sudo rm -rf $NEOVIM_REPO
 # link necessary files to nvim config file location
 mkdir -p "$NVIM_CONFIG"
 if [ -f "$NVIM_CONFIG/$INIT_VIM" ]; then
-  init_vim_backup="$NVIM_CONFIG/init.vim.backup"
+  init_vim_backup="$NVIM_CONFIG/$INIT_VIM.backup"
   i=1
   while [ -f "$init_vim_backup" ]; do
-    INIT_VIM="$NVIM_CONFIG/init.vim.backup-$i"
+    INIT_VIM="$NVIM_CONFIG/$INIT_VIM.backup-$i"
     i=$(( $i + 1 ))
   done
 
-  echo "Detected existing 'init.vim', backing it up to $init_vim_backup"
-  mv "$NVIM_CONFIG/init.vim" "$init_vim_backup"
+  echo "Detected existing '$INIT_VIM', backing it up to $init_vim_backup"
+  mv "$NVIM_CONFIG/$INIT_VIM" "$init_vim_backup"
 fi
-ln -s $(get_abs_path "cpp/init.vim") "$NVIM_CONFIG"
+ln -s $(get_abs_path "cpp/init.vim") "$NVIM_CONFIG/$INIT_VIM"
 
 # install vim-plug plugin manager
 mkdir -p "$NVIM_CONFIG"
