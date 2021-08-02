@@ -41,7 +41,6 @@ brew install llvm
 # install & configure cppman (e.g., download all relevant man pages)
 brew install cppman
 cppman --pager nvim
-cppman -c
 
 # install & configure vimspector dependencies for c++
 pip3 install pynvim
