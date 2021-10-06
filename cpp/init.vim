@@ -43,7 +43,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'puremourning/vimspector' ", { 'do': './install_gadget.py --enable-c --enable-cpp --enable-rust' }
 call plug#end()
 
-" ==== configure lsp integration ====
+" ==== configure lsp integration & nvim-cmp ====
+set completeopt=menu,menuone,noselect
 lua << EOF
   -- connect to clangd
   require'lspconfig'.clangd.setup{}
@@ -77,8 +78,27 @@ lua << EOF
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   end
 
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    mapping = {
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'buffer' },
+    }
+  })
+
   -- TODO: add cmake lsp etc
   nvim_lsp["clangd"].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = on_clangd_attach,
     flags = {
       debounce_text_changes = 150,
@@ -92,32 +112,6 @@ autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({f
 
 " ==== autoformat on save ====
 autocmd FileType c,cpp :ClangFormatAutoEnable
-
-" ==== setup nvim-cmp ====
-set completeopt=menu,menuone,noselect
-lua <<EOF
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
-
-  cmp.setup({
-    mapping = {
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    },
-    sources = {
-      { name = 'nvim_lsp' },
-      { name = 'buffer' },
-    }
-  })
-
-  -- Setup lspconfig.
-  require('lspconfig')["clangd"].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  }
-EOF
 
 " ==== Vimspector configuration ====
 " vimspector keyboard mappings, emulate CLion as good as possible
