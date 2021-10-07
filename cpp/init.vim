@@ -28,6 +28,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
 
+  " snippet plugin
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+
   " cppman support in vim, i.e., press 'K' in cpp file to
   " open corresponding cpp reference for that symbol
   Plug 'DominikHorn/vim-cppman', { 'on': 'Cppman' }
@@ -82,6 +86,11 @@ lua << EOF
   local cmp = require'cmp'
 
   cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
     mapping = {
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -92,11 +101,11 @@ lua << EOF
     },
     sources = {
       { name = 'nvim_lsp' },
+      { name = 'vsnip' },
       { name = 'buffer' },
     }
   })
 
-  -- TODO: add cmake lsp etc
   nvim_lsp["clangd"].setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = on_clangd_attach,
