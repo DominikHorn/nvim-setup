@@ -41,12 +41,14 @@ sh -c 'curl -fLo "${HOME}/.config/nvim/autoload/plug.vim" --create-dirs \
 brew install llvm
 cat <<EOT >> ~/.customrc
 
-# overwrite system clang
-export PATH="/usr/local/opt/llvm/bin:\$PATH"
-export CC="/usr/local/opt/llvm/bin/clang"
-export CXX="\${CC}++"
-export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
-export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm/include/c++/v1/"
+# overwrite system clang if we're in a rosetta terminal
+if [ "\$(uname -m)" = "x86_64" ]; then
+  export PATH="/usr/local/opt/llvm/bin:\$PATH"
+  export CC="/usr/local/opt/llvm/bin/clang"
+  export CXX="\${CC}++"
+  export LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+  export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/llvm/include/c++/v1/"
+fi
 EOT
 
 # install & configure cppman (e.g., download all relevant man pages)
