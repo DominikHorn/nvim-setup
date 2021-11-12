@@ -30,7 +30,7 @@ if [ -f "$NVIM_CONFIG/$INIT_VIM" ]; then
   echo "Detected existing '$INIT_VIM', backing it up to $init_vim_backup"
   mv "$NVIM_CONFIG/$INIT_VIM" "$init_vim_backup"
 fi
-ln -s $(get_abs_path "cpp/init.vim") "$NVIM_CONFIG/$INIT_VIM"
+ln -s $(get_abs_path "${REL_SCRIPT_DIR}/init.vim") "$NVIM_CONFIG/$INIT_VIM"
 
 # install vim-plug plugin manager
 sh -c 'curl -fLo "${HOME}/.config/nvim/autoload/plug.vim" --create-dirs \
