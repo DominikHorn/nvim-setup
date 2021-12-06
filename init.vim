@@ -24,6 +24,9 @@ noremap <Right> <NOP>
 
 " ==== plugins ====
 call plug#begin('~/.config/nvim/plugged')
+  " airline
+  Plug 'vim-airline/vim-airline'
+
   " lsp client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -48,7 +51,6 @@ call plug#end()
 set hidden
 set nobackup
 set nowritebackup
-set cmdheight=2
 set updatetime=300
 set shortmess+=c
 set signcolumn=number
@@ -186,6 +188,10 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" ==== airline ====
+" airline & nerdtree cooperation
+let g:airline_powerline_fonts = 1
 
 " ==== coc plugins ===
 let g:coc_global_extensions = [
