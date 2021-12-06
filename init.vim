@@ -189,6 +189,9 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+" configure GUI open
+set guifont=DroidSansMono_Nerd_Font:h16
+
 " ==== airline ====
 " airline & nerdtree cooperation
 let g:airline_powerline_fonts = 1
