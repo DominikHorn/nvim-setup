@@ -14,31 +14,9 @@ get_abs_path() {
 set -e
 
 # install neovim
-brew install neovim
+brew install neovim llvm
 
-# link necessary files to nvim config file location
-mkdir -p "$NVIM_CONFIG"
-echo "checking $NVIM_CONFIG/$INIT_VIM"
-if [ -f "$NVIM_CONFIG/$INIT_VIM" ]; then
-  init_vim_backup="$NVIM_CONFIG/$INIT_VIM.backup"
-  i=1
-  while [ -f "$init_vim_backup" ]; do
-    INIT_VIM="$NVIM_CONFIG/$INIT_VIM.backup-$i"
-    i=$(( $i + 1 ))
-  done
-
-  echo "Detected existing '$INIT_VIM', backing it up to $init_vim_backup"
-  mv "$NVIM_CONFIG/$INIT_VIM" "$init_vim_backup"
-fi
-ln -s $(get_abs_path "${REL_SCRIPT_DIR}/init.vim") "$NVIM_CONFIG/$INIT_VIM"
-
-# install vim-plug plugin manager
-sh -c 'curl -fLo "${HOME}/.config/nvim/autoload/plug.vim" --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-# install & configure clangd following official documentation:
-# https://clangd.llvm.org/installation
-brew install llvm
+# configure clangd following official documentation: https://clangd.llvm.org/installation
 cat <<EOT >> ~/.customrc
 
 # overwrite system clang if we're in a rosetta terminal
@@ -51,11 +29,7 @@ if [ "\$(uname -m)" = "x86_64" ]; then
 fi
 EOT
 
-# install & configure cppman (e.g., download all relevant man pages)
-brew install cppman
-cppman --pager nvim
-
-# install & configure vimspector dependencies for c++
+# install & configure vimspector dependencies
 pip3 install pynvim
 
 # execute :PlugInstall & :VimspectorInstall once to finish setup
