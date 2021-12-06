@@ -26,6 +26,7 @@ noremap <Right> <NOP>
 call plug#begin('~/.config/nvim/plugged')
   " airline
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
   " lsp client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -193,8 +194,7 @@ nnoremap <C-f> :NERDTreeFind<CR>
 set guifont=DroidSansMono_Nerd_Font:h16
 
 " ==== airline ====
-" airline & nerdtree cooperation
-let g:airline_powerline_fonts = 1
+let g:airline_theme='dark'
 
 " ==== coc plugins ===
 let g:coc_global_extensions = [
