@@ -34,6 +34,9 @@ call plug#begin('~/.config/nvim/plugged')
   " git support
   Plug 'tpope/vim-fugitive'
 
+  " fuzzy file search
+  Plug 'kien/ctrlp.vim'
+
   " file system explorer
   Plug 'preservim/nerdtree'
 
