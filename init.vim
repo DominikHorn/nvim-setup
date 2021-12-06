@@ -24,6 +24,9 @@ call plug#begin('~/.config/nvim/plugged')
   " lsp client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+  " file system explorer
+  Plug 'preservim/nerdtree'
+
   " == cxx
   Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'rhysd/vim-clang-format'
@@ -164,6 +167,19 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" ==== nerdtree ====
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " ==== coc plugins ===
 let g:coc_global_extensions = [
