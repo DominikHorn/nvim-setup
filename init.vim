@@ -31,6 +31,9 @@ call plug#begin('~/.config/nvim/plugged')
   " lsp client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+  " git support
+  Plug 'tpope/vim-fugitive'
+
   " file system explorer
   Plug 'preservim/nerdtree'
 
