@@ -1,8 +1,11 @@
 " general settings
 set colorcolumn=120
-set encoding=utf-8
+set cursorline
+set cursorlineopt=number
+set encoding=UTF-8
 set expandtab
 set incsearch
+set nowrap
 set number
 set relativenumber
 set ruler
