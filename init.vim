@@ -195,6 +195,8 @@ set guifont=DroidSansMono_Nerd_Font:h16
 
 " ==== airline ====
 let g:airline_theme='dark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
 
 " ==== coc plugins ===
 let g:coc_global_extensions = [
