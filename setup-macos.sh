@@ -14,7 +14,15 @@ get_abs_path() {
 set -e
 
 # install neovim
-brew install neovim llvm
+brew install neovim
+
+# install font for nerdtree -> devicon
+brew tap homebrew/cask-fonts
+brew install --cask font-droid-sans-mono-nerd-font
+echo "Please set terminal font to 'droid sans mono nerd'"
+
+# install llvm (clangd, clang-format etc) for cpp
+brew install llvm
 
 # configure clangd following official documentation: https://clangd.llvm.org/installation
 cat <<EOT >> ~/.customrc
