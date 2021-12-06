@@ -30,6 +30,9 @@ call plug#begin('~/.config/nvim/plugged')
   " file system explorer
   Plug 'preservim/nerdtree'
 
+  " file icons
+  Plug 'ryanoasis/vim-devicons'
+
   " == cxx
   Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'rhysd/vim-clang-format'
