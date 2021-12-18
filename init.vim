@@ -45,7 +45,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " == cxx
   Plug 'jackguo380/vim-lsp-cxx-highlight'
-  Plug 'rhysd/vim-clang-format'
 
   " == tsx
   Plug 'pangloss/vim-javascript'
