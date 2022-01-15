@@ -31,6 +31,9 @@ call plug#begin('~/.config/nvim/plugged')
   " lsp client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+  " debugger client
+  Plug 'puremourning/vimspector'
+
   " git support
   Plug 'tpope/vim-fugitive'
 
@@ -221,3 +224,24 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-pairs'
   \ ]
+
+" ==== vimspector config ====
+" vimspector keyboard mappings, emulate CLion as good as possible
+nmap <F1>         <Plug>VimspectorToggleBreakpoint
+nmap <leader><F1> <Plug>VimspectorToggleConditionalBreakpoint
+nmap <F2>         <Plug>VimspectorAddFunctionBreakpoint
+
+nmap <F3>         :VimspectorReset<CR>
+nmap <leader><F3> <Plug>VimspectorStop
+nmap <F4>         <Plug>VimspectorRestart
+nmap <F5>         <Plug>VimspectorContinue
+nmap <leader><F5> <Plug>VimspectorLaunch
+nmap <F6>         <Plug>VimspectorPause
+
+nmap <F7>         <Plug>VimspectorStepInto
+nmap <F8>         <Plug>VimspectorStepOver
+nmap <leader><F8> <Plug>VimspectorStepOut
+nmap <F9>         <Plug>VimspectorRunToCursor
+
+" start vimspector
+nnoremap <leader>d :execute '!./build-debug.sh' \| if !v:shell_error \| call vimspector#Launch() \| endif<CR>
