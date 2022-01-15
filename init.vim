@@ -222,6 +222,9 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-sh',
   \ 'coc-tsserver',
+  \ 'coc-texlab',
+  \ 'coc-vimtex',
+  \ 'coc-snippets',
   \ 'coc-pairs'
   \ ]
 
