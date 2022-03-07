@@ -1,5 +1,5 @@
 {
-  "clangd.semanticHighlighting": true,
+  "clangd.semanticHighlighting": false,
   "coc.preferences.semanticTokensHighlights": false,
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
